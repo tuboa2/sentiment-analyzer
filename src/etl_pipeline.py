@@ -43,6 +43,28 @@ def transform_data(df: DataFrame) -> DataFrame:
 
     return df_clean
 
+def balance_data(df_cleaned: DataFrame) -> DataFrame:
+    print("\nStarting Undersampling to Balance the Dataset...")
+    # find the number of rows for neutral
+    min_size = df_cleaned['sentiment'].value_counts().min()
+    print(f"Smallest category size found: {min_size} rows. Chopping larger categories down to match...")
+
+    # now we will separate the dataset
+    pos_df = df_cleaned[df_cleaned['sentiment'] == 'Positive'].sample(n=min_size, random_state=42)
+    neu_df = df_cleaned[df_cleaned['sentiment'] == 'Neutral'].sample(n=min_size, random_state=42)
+    neg_df = df_cleaned[df_cleaned['sentiment'] == 'Negative'].sample(n=min_size, random_state=42)
+
+    # now lets join all of the 3 separate df
+    balanced_df = pd.concat([pos_df, neu_df, neg_df])
+
+    # shuffle to avoid bias
+    balanced_df = balanced_df.sample(frac=1, random_state=42).reset_index(drop=True)
+
+    print("Dataset successfully balanced!")
+    print(balanced_df['sentiment'].value_counts())
+
+    return balanced_df
+
 # helper function to convert scores to sentiment
 def convert_to_sentiment(score: int) -> str:
     if score >= 4:
@@ -96,7 +118,10 @@ if __name__ == "__main__":
         # 2. Transform
         clean_data = transform_data(raw_data)
 
+        # fix: get the balanced data
+        balanced_data = balance_data(clean_data)
+
         # 3. Load
-        load_processed_data(clean_data)
+        load_processed_data(balanced_data)
 
         print("\nSUCCESS: ETL Pipeline Finished. The data is now ready.")
