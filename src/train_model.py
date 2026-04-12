@@ -5,7 +5,7 @@ from vectorize import vectorize
 def train_model(x_train, y_train):
     print("Initializing Multinomial Naive Bayes Algorithm...")
 
-    model = MultinomialNB()
+    model = MultinomialNB(fit_prior=False)
 
     print("Training the model on 160,000 rows. This might take a few minutes...")
     model.fit(x_train, y_train)
