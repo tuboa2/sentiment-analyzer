@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-neon: oklch(0.9 0.15 110);
+  --color-glass: oklch(0.95 0.02 240 / 0.2);
+  --color-glass-dark: oklch(0.15 0.02 240 / 0.2);
+
+  --font-sans: "Inter", "San Francisco", -apple-system, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[oklch(0.98_0.01_240)] dark:bg-[oklch(0.1_0.01_240)] text-black dark:text-white antialiased;
+    margin: 0;
+  }
+}
