@@ -109,4 +109,4 @@ pnpm dev
 * **Batch Processing Endpoint:** Allow users to upload a CSV file and return a fully categorized column.
 
 ---
-*Built with discipline and caffeine by Kazuha & Tuboa.*
+*Built with discipline and caffeine by Tuboa.*
