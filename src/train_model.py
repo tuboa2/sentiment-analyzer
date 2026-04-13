@@ -7,7 +7,7 @@ def train_model(x_train, y_train):
 
     model = MultinomialNB(fit_prior=False)
 
-    print("Training the model on 160,000 rows. This might take a few minutes...")
+    print("Training the model on 30,000 rows. This might take a few minutes...")
     model.fit(x_train, y_train)
 
     joblib.dump(model, "sentiment-analyzer/data/processed/sentiment_model.pkl")
