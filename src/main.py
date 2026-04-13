@@ -7,10 +7,17 @@ import os
 # initialize app
 app = FastAPI(title="Sentiment Analyzer")
 
+# add origins
+origins = [
+    "http://localhost:5173",          # Your local Vite React server
+    "http://127.0.0.1:5173",          # Alternate local URL
+    "https://sentiment-analyzer-drab.vercel.app/" # REPACE THIS with your actual Vercel URL
+]
+
 # cors middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # allows communication to backend
+    allow_origins=origins, # allows communication to backend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
